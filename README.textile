@@ -42,27 +42,27 @@ Feature "User accepting a colleague request" do
         login_as(@user)
         visit colleagues_path(:type => 'requested')
       end
-      
+
       When %(I press "Add as Colleage") do
         executes { click_button 'Add as colleague' }
-        
+
         Then "I should be on the colleagues list page" do
           current_url.should == colleagues_url
         end
-         
+
         And "I should see the requestor's name" do
           response.body.should contain_text(@requesting_user.name)
         end
-        
+
         When "I sign in as the requestor" do
           executes do
             logout
             login_as(@requesting_user)
           end
-          
+
           When "I go to the colleagues list page" do
             executes { visit colleagues_path }
-            
+
             Then "I should see the requestee's name" do
               response.body.should contain_text(@user.name)
             end

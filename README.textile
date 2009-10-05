@@ -1,0 +1,8 @@
+h1. GherkinSpec
+
+_You got Cucumber in my RSpec!_
+
+Docs coming Real Soon Now (TM).
+
+Copyright (c) 2009 Hashrocket. See MIT-LICENSE for details.
+ 

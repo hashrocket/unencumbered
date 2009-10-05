@@ -1,8 +1,91 @@
-h1. GherkinSpec
+h1. Gherkinspec
 
 _You got Cucumber in my RSpec!_
 
-Docs coming Real Soon Now (TM).
+Write Cucumber-flavored integration tests as easily as you write your RSpec.
+
+
+h2. To Get Output Like This
+
+Output from a @rake spec:integration@ run:
+
+  User accepting a colleague request
+    Scenario:  accepting
+      Given I am on my incoming colleague requests page
+        When I press "Add as Colleage"
+          Then I should be on the colleagues list page
+          And I should see the requestor's name
+          When I sign in as the requestor
+            When I go to the colleagues list page
+              Then I should see the requestee's name
+
+h2. Make a Feature Like This
+
+Put it in a .feature file in the _spec/integration_ folder. Here's
+_user_accepts_colleague_request_spec.rb_ for example:
+
+  require File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec_helper'))
+
+  Feature "User accepting a colleague request" do
+    Scenario "accepting" do
+      Given "I am on my incoming colleague requests page" do
+        executes do
+          @user = Factory(:user)
+          @requesting_user = Factory(:user)
+          make_colleague_request(@requesting_user, @user)
+          login_as(@user)
+          visit colleagues_path(:type => 'requested')
+        end
+        
+        When %(I press "Add as Colleage") do
+          executes { click_button 'Add as colleague' }
+          
+          Then "I should be on the colleagues list page" do
+            current_url.should == colleagues_url
+          end
+          
+          And "I should see the requestor's name" do
+            response.body.should contain_text(@requesting_user.name)
+          end
+          
+          When "I sign in as the requestor" do
+            executes do
+              logout
+              login_as(@requesting_user)
+            end
+            
+            When "I go to the colleagues list page" do
+              executes { visit colleagues_path }
+              
+              Then "I should see the requestee's name" do
+                response.body.should contain_text(@user.name)
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+
+h2. Just Set Up Your Spec Helper Like This
+
+Meld these lines into your existing _spec/spec_helper.rb_:
+
+  require 'webrat'
+  require 'spec/support/integration'
+  require 'gherkinspec'
+
+  Webrat.configure do |config|
+    config.mode = :rails
+  end
+
+  Spec::Runner.configure do |config|
+    config.include(Webrat::Matchers, :type => [:integration])
+  end
+
+  class ActionController::Integration::Session; include Spec::Matchers; end
+
 
 Copyright (c) 2009 Hashrocket. See MIT-LICENSE for details.
  

@@ -25,7 +25,7 @@ User accepting a colleague request
 
 h2. Make a Feature Like This
 
-Put it in a .feature file in the _spec/integration_ folder. Here's
+Put it in a spec file in the _spec/integration_ folder. Here's
 _user_accepts_colleague_request_spec.rb_ for example:
 
 <pre>

@@ -33,19 +33,21 @@ Feature "User creates a vurl" do
   Scenario "creating" do
     Given "I am on the home page" do
       executes { visit root_path }
-
+      
       When "I submit a valid vurl" do
         executes do
           fill_in "vurl_url", :with => 'http://example.com'
           click_button 'Vurlify!'
         end
-
+        
         Then "I should be on the vurl stats page" do
           current_url.should == stats_url(Vurl.last.slug)
         end
+        
         And "I should see a success message" do
           response.body.should include('Vurl was successfully created')
         end
+        
         And "my vurl was created" do
           Vurl.last.url.should == 'http://example.com'
         end
@@ -56,9 +58,10 @@ end
 </code>
 </pre>
 
-h2. Just Set Up Your Spec Helper Like This
+h2. Set Up Your spec_helper Like This
 
-Meld these lines into your existing _spec/spec_helper.rb_:
+Meld these lines into your existing _spec/spec_helper.rb_. The _gherkinspec_
+require needs to be last, since it patches RSpec.
 
 <pre>
 <code>
@@ -66,5 +69,6 @@ require 'webrat'
 require 'gherkinspec'
 </code>
 </pre>
+
 
 Copyright (c) 2009 Hashrocket.  See LICENSE for details.

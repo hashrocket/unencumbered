@@ -63,7 +63,6 @@ Meld these lines into your existing _spec/spec_helper.rb_:
 <pre>
 <code>
 require 'webrat'
-require 'spec/support/integration'
 require 'gherkinspec'
 </code>
 </pre>

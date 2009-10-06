@@ -58,7 +58,22 @@ end
 </code>
 </pre>
 
-h2. Set Up Your spec_helper Like This
+h2. Set Up
+
+h3. Environment
+
+Add this line to your _config/environments/test.rb_ file. Make sure to use the
+@:lib => false@ item.  We need to require the library manually in the
+_spec_helper.rb_, since it patches RSpec.
+
+<pre>
+<code>
+config.gem "hashrocket-gherkinspec", :lib => false, :version => '>= 0.x.x'
+</code>
+</pre>
+
+
+h3. spec_helper.rb
 
 Meld these lines into your existing _spec/spec_helper.rb_. The _gherkinspec_
 require needs to be last, since it patches RSpec.

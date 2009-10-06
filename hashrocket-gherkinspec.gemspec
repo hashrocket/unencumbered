@@ -4,7 +4,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{gherkinspec}
+  s.name = %q{hashrocket-gherkinspec}
   s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -20,8 +20,10 @@ Gem::Specification.new do |s|
     ".document",
      ".gitignore",
      "LICENSE",
+     "README.textile",
      "Rakefile",
      "VERSION",
+     "hashrocket-gherkinspec.gemspec",
      "lib/gherkinspec.rb"
   ]
   s.homepage = %q{http://github.com/hashrocket/gherkinspec}

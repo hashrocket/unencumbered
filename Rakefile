@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "gherkinspec"
+    gem.name = "hashrocket-gherkinspec"
     gem.summary = %Q{Just enough Cucumber in RSpec.}
     gem.description = %Q{You got Cucumber in my RSpec!}
     gem.email = "info@hashrocket.com"

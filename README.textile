@@ -4,69 +4,50 @@ _You got Cucumber in my RSpec!_
 
 Write Cucumber-flavored integration tests as easily as you write your RSpec.
 
-
 h2. To Get Output Like This
 
 Output from a @rake spec:integration@ run:
 
 <pre>
 <code>
-User accepting a colleague request
-  Scenario:  accepting
-    Given I am on my incoming colleague requests page
-      When I press "Add as Colleage"
-        Then I should be on the colleagues list page
-        And I should see the requestor's name
-        When I sign in as the requestor
-          When I go to the colleagues list page
-            Then I should see the requestee's name
+User creates a vurl
+  Scenario:  creating
+    Given I am on the home page
+      When I submit a valid vurl
+        Then I should be on vurl stats page
+        And I should see a success message
+        And my vurl was successfully created
 </code>
 </pre>
 
 h2. Make a Feature Like This
 
 Put it in a spec file in the _spec/integration_ folder. Here's
-_user_accepts_colleague_request_spec.rb_ for example:
+_user_creates_vurl_spec.rb_ for example:
 
 <pre>
 <code>
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec_helper'))
 
-Feature "User accepting a colleague request" do
-  Scenario "accepting" do
-    Given "I am on my incoming colleague requests page" do
-      executes do
-        @user = Factory(:user)
-        @requesting_user = Factory(:user)
-        make_colleague_request(@requesting_user, @user)
-        login_as(@user)
-        visit colleagues_path(:type => 'requested')
-      end
+Feature "User creates a vurl" do
+  Scenario "creating" do
+    Given "I am on the home page" do
+      executes { visit root_path }
 
-      When %(I press "Add as Colleage") do
-        executes { click_button 'Add as colleague' }
-
-        Then "I should be on the colleagues list page" do
-          current_url.should == colleagues_url
+      When "I submit a valid vurl" do
+        executes do
+          fill_in "vurl_url", :with => 'http://example.com'
+          click_button 'Vurlify!'
         end
 
-        And "I should see the requestor's name" do
-          response.body.should contain_text(@requesting_user.name)
+        Then "I should be on the vurl stats page" do
+          current_url.should == stats_url(Vurl.last.slug)
         end
-
-        When "I sign in as the requestor" do
-          executes do
-            logout
-            login_as(@requesting_user)
-          end
-
-          When "I go to the colleagues list page" do
-            executes { visit colleagues_path }
-
-            Then "I should see the requestee's name" do
-              response.body.should contain_text(@user.name)
-            end
-          end
+        And "I should see a success message" do
+          response.body.should include('Vurl was successfully created')
+        end
+        And "my vurl was created" do
+          Vurl.last.url.should == 'http://example.com'
         end
       end
     end

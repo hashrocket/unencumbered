@@ -4,7 +4,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{hashrocket-gherkinspec}
+  s.name = %q{hashrocket-ghostwriter}
   s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -23,10 +23,10 @@ Gem::Specification.new do |s|
      "README.textile",
      "Rakefile",
      "VERSION",
-     "hashrocket-gherkinspec.gemspec",
-     "lib/gherkinspec.rb"
+     "hashrocket-ghostwriter.gemspec",
+     "lib/ghostwriter.rb"
   ]
-  s.homepage = %q{http://github.com/hashrocket/gherkinspec}
+  s.homepage = %q{http://github.com/hashrocket/ghostwriter}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}

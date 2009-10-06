@@ -68,4 +68,4 @@ require 'gherkinspec'
 </code>
 </pre>
 
-Copyright (c) 2009 Hashrocket. See MIT-LICENSE for details.
+Copyright (c) 2009 Hashrocket.  See LICENSE for details.

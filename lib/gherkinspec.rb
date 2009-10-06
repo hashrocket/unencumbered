@@ -38,14 +38,14 @@ if defined? ActionController::Integration::Session
   end
 end
 
-if defined? Spec::Runner
-  Spec::Runner.configure do |config|
-    config.include(Webrat::Matchers, :type => [:integration])
-  end
-end
-
 if defined? Webrat
   Webrat.configure do |config|
     config.mode = :rails
+  end
+
+  if defined? Spec::Runner
+    Spec::Runner.configure do |config|
+      config.include(Webrat::Matchers, :type => [:integration])
+    end
   end
 end

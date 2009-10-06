@@ -84,16 +84,6 @@ Meld these lines into your existing _spec/spec_helper.rb_:
 require 'webrat'
 require 'spec/support/integration'
 require 'gherkinspec'
-
-Webrat.configure do |config|
-  config.mode = :rails
-end
-
-Spec::Runner.configure do |config|
-  config.include(Webrat::Matchers, :type => [:integration])
-end
-
-class ActionController::Integration::Session; include Spec::Matchers; end
 </code>
 </pre>
 

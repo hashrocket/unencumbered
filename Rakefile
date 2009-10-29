@@ -4,11 +4,11 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "hashrocket-ghostwriter"
+    gem.name = "unencumbered"
     gem.summary = %Q{Just enough Cucumber in RSpec.}
     gem.description = %Q{You got Cucumber in my RSpec!}
     gem.email = "info@hashrocket.com"
-    gem.homepage = "http://github.com/hashrocket/ghostwriter"
+    gem.homepage = "http://github.com/hashrocket/unencumbered"
     gem.authors = ["Hashrocket"]
   end
 rescue LoadError

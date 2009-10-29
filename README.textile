@@ -1,4 +1,4 @@
-h1. Ghostwriter
+h1. Unencumbered
 
 _You got Cucumber in my RSpec!_
 
@@ -68,20 +68,20 @@ _spec_helper.rb_, since it patches RSpec.
 
 <pre>
 <code>
-config.gem "hashrocket-ghostwriter", :lib => false, :version => '>= 0.x.x'
+config.gem "unencumbered", :lib => false, :version => '>= 0.x.x'
 </code>
 </pre>
 
 
 h3. spec_helper.rb
 
-Meld these lines into your existing _spec/spec_helper.rb_. The _ghostwriter_
+Meld these lines into your existing _spec/spec_helper.rb_. The _unencumbered_
 require needs to be last, since it patches RSpec.
 
 <pre>
 <code>
 require 'webrat'
-require 'ghostwriter'
+require 'unencumbered'
 </code>
 </pre>
 

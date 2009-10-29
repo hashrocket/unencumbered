@@ -26,6 +26,10 @@ module Spec::Example::ExampleGroupMethods
     example("And #{description}", &blk)
   end
 
+  def But(description, &blk)
+    example("But #{description}", &blk)
+  end
+
   def executes(scope=:all, &blk)
     before(scope, &blk)
   end

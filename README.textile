@@ -4,6 +4,7 @@ _You got Cucumber in my RSpec!_
 
 Write Cucumber-flavored integration tests as easily as you write your RSpec.
 
+
 h2. To Get Output Like This
 
 Output from a @rake spec:integration@ run:
@@ -20,10 +21,10 @@ User creates a vurl
 </code>
 </pre>
 
+
 h2. Make a Feature Like This
 
-Put it in a spec file in the _spec/integration_ folder. Here's
-_user_creates_vurl_spec.rb_ for example:
+Put it in a spec file in the _spec/integration_ folder. Here's _user_creates_vurl_spec.rb_ for example:
 
 <pre>
 <code>
@@ -33,21 +34,21 @@ Feature "User creates a vurl" do
   Scenario "creating" do
     Given "I am on the home page" do
       executes { visit root_path }
-      
+
       When "I submit a valid vurl" do
         executes do
           fill_in "vurl_url", :with => 'http://example.com'
           click_button 'Vurlify!'
         end
-        
+
         Then "I should be on the vurl stats page" do
           current_url.should == stats_url(Vurl.last.slug)
         end
-        
+
         And "I should see a success message" do
           response.body.should include('Vurl was successfully created')
         end
-        
+
         And "my vurl was created" do
           Vurl.last.url.should == 'http://example.com'
         end
@@ -58,13 +59,12 @@ end
 </code>
 </pre>
 
+
 h2. Set Up
 
 h3. Environment
 
-Add this line to your _config/environments/test.rb_ file. Make sure to use the
-@:lib => false@ item.  We need to require the library manually in the
-_spec_helper.rb_, since it patches RSpec.
+Add this line to your _config/environments/test.rb_ file. Make sure to use the @:lib => false@ item.  We need to require the library manually in the _spec_helper.rb_, since it patches RSpec.
 
 <pre>
 <code>
@@ -75,9 +75,7 @@ config.gem "unencumbered", :lib => false, :version => 'x.x.x'
 
 h3. spec_helper.rb
 
-Meld these lines into your existing _spec/spec_helper.rb_. Note the
-_unencumbered_ require needs to be after your RSpec requires, since it patches
-RSpec.
+Meld these lines into your existing _spec/spec_helper.rb_. Note the _unencumbered_ require needs to be after your RSpec requires, since it patches RSpec.
 
 <pre>
 <code>
@@ -102,8 +100,7 @@ class ActionController::Integration::Session; include Spec::Matchers; end
 
 h3. spec.opts
 
-RSpec's nested format reads nicely. Put this line in your _spec/spec.opts_
-file.
+RSpec's nested format reads nicely. Put this line in your _spec/spec.opts_ file.
 
 <pre>
 <code>

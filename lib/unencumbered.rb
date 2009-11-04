@@ -38,21 +38,3 @@ module Spec::Example::ExampleGroupMethods
     describe("Background #{description}", &blk)
   end
 end
-
-if defined? ActionController::Integration::Session
-  class ActionController::Integration::Session
-    include Spec::Matchers
-  end
-end
-
-if defined? Webrat
-  Webrat.configure do |config|
-    config.mode = :rails
-  end
-
-  if defined? Spec::Runner
-    Spec::Runner.configure do |config|
-      config.include(Webrat::Matchers, :type => [:integration])
-    end
-  end
-end

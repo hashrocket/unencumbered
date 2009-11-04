@@ -27,7 +27,7 @@ _user_creates_vurl_spec.rb_ for example:
 
 <pre>
 <code>
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec_helper'))
+require File.expand_path('../../spec_helper', __FILE__)
 
 Feature "User creates a vurl" do
   Scenario "creating" do
@@ -68,20 +68,46 @@ _spec_helper.rb_, since it patches RSpec.
 
 <pre>
 <code>
-config.gem "unencumbered", :lib => false, :version => '>= 0.x.x'
+config.gem "unencumbered", :lib => false, :version => 'x.x.x'
 </code>
 </pre>
 
 
 h3. spec_helper.rb
 
-Meld these lines into your existing _spec/spec_helper.rb_. The _unencumbered_
-require needs to be last, since it patches RSpec.
+Meld these lines into your existing _spec/spec_helper.rb_. Note the
+_unencumbered_ require needs to be after your RSpec requires, since it patches
+RSpec.
 
 <pre>
 <code>
-require 'webrat'
 require 'unencumbered'
+require 'webrat'
+
+Webrat.configure do |config|
+  config.mode = :rails
+end
+
+Spec::Runner.configure do |config|
+
+  [...your other config code...]
+
+  config.include(Webrat::Matchers, :type => [:integration])
+end
+
+class ActionController::Integration::Session; include Spec::Matchers; end
+</code>
+</pre>
+
+
+h3. spec.opts
+
+RSpec's nested format reads nicely. Put this line in your _spec/spec.opts_
+file.
+
+<pre>
+<code>
+--format nested
 </code>
 </pre>
 

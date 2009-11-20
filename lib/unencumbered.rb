@@ -1,6 +1,6 @@
 module Spec::DSL::Main
   alias :Feature :describe
-  def Story(description)
+  def narrative(description)
     @description_args.push("\n#{description}\n")
   end
 end

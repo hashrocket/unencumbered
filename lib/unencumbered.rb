@@ -6,35 +6,35 @@ module Spec::DSL::Main
 end
 
 module Spec::Example::ExampleGroupMethods
-  def Scenario(description, &blk)
-    describe("Scenario:  #{description}", &blk)
+  def Scenario(description, &implementation)
+    describe("Scenario:  #{description}", &implementation)
   end
 
-  def Given(description, &blk)
-    describe("Given #{description}", &blk)
+  def Given(description, &implementation)
+    describe("Given #{description}", &implementation)
   end
 
-  def When(description, &blk)
-    describe("When #{description}", &blk)
+  def When(description, &implementation)
+    describe("When #{description}", &implementation)
   end
 
-  def Then(description, &blk)
-    example("Then #{description}", &blk)
+  def Then(description, &implementation)
+    example("Then #{description}", &implementation)
   end
 
-  def And(description, &blk)
-    example("And #{description}", &blk)
+  def And(description, &implementation)
+    example("And #{description}", &implementation)
   end
 
-  def But(description, &blk)
-    example("But #{description}", &blk)
+  def But(description, &implementation)
+    example("But #{description}", &implementation)
   end
 
-  def executes(scope=:all, &blk)
-    before(scope, &blk)
+  def executes(scope=:all, &implementation)
+    before(scope, &implementation)
   end
 
-  def Background(description, &blk)
-    describe("Background #{description}", &blk)
+  def Background(description, &implementation)
+    describe("Background #{description}", &implementation)
   end
 end

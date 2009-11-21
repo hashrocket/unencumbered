@@ -1,5 +1,5 @@
 module Spec::DSL::Main
-  alias :Feature :describe
+  alias_method :Feature, :describe
   def narrative(description)
     @description_args.push("\n#{description}\n")
   end
@@ -7,7 +7,7 @@ end
 
 module Spec::Example::ExampleGroupMethods
   def Scenario(description, &implementation)
-    describe("Scenario:  #{description}", &implementation)
+    describe("Scenario: #{description}", &implementation)
   end
 
   def Given(description, &implementation)

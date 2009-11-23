@@ -10,31 +10,15 @@ module Spec::Example::ExampleGroupMethods
     describe("Scenario: #{description}", &implementation)
   end
 
-  def Given(description, &implementation)
-    describe("Given #{description}", &implementation)
-  end
-
-  def When(description, &implementation)
-    describe("When #{description}", &implementation)
-  end
-
-  def Then(description, &implementation)
-    example("Then #{description}", &implementation)
-  end
-
-  def And(description, &implementation)
-    example("And #{description}", &implementation)
-  end
-
-  def But(description, &implementation)
-    example("But #{description}", &implementation)
-  end
-
   def executes(scope=:all, &implementation)
     before(scope, &implementation)
   end
 
-  def Background(description, &implementation)
-    describe("Background #{description}", &implementation)
+  def method_missing(symbol,*args,&block)
+    if symbol.to_s =~ /Given|When|Background/
+      describe("#{symbol} #{args.first}", &block)
+    elsif symbol.to_s =~ /Then|And|But/
+      example("#{symbol} #{args.first}", &block)
+    end
   end
 end

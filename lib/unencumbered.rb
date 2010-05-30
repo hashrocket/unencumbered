@@ -1,26 +1,28 @@
-if defined?(Spec)
-  module Spec::DSL::Main
-    alias_method :Feature, :describe
-    def narrative(description)
-      @description_args.push("\n#{description}\n")
-    end
-  end
+if defined?(RSpec)
+  class RSpec::Core::ExampleGroup
+    class << self
+      alias_method :Feature, :describe
 
-  module Spec::Example::ExampleGroupMethods
-    def Scenario(description, &implementation)
-      describe("Scenario: #{description}", &implementation)
-    end
-
-    def executes(scope=:all, &implementation)
-      before(scope, &implementation)
-    end
-
-    def method_missing(symbol,*args,&block)
-      if symbol.to_s =~ /Given|When|Background/
-        describe("#{symbol} #{args.first}", &block)
-      elsif symbol.to_s =~ /Then|And|But/
-        example("#{symbol} #{args.first}", &block)
+      def executes(scope=:all, &block)
+        before(scope, &block)
       end
+    end
+
+    %w(Scenario: Given When Background).each do |group|
+      method_name = group.sub(":", "")
+      module_eval(<<-END_RUBY, __FILE__, __LINE__)
+        def self.#{method_name}(*args, &example_group_block)
+          describe(#{group.inspect}, *args, &example_group_block)
+        end
+      END_RUBY
+    end
+
+    %w(Then And But).each do |type|
+      module_eval(<<-END_RUBY, __FILE__, __LINE__)
+        def self.#{type}(desc=nil, options={}, &block)
+          example("#{type} \#{desc}", options, &block)
+        end
+      END_RUBY
     end
   end
 end

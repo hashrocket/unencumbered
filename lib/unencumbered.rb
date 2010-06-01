@@ -1,11 +1,11 @@
 if defined?(RSpec)
-  class RSpec::Core::ExampleGroup
-    class << self
-      alias_method :Feature, :describe
+  module Rspec::Core::ObjectExtensions
+    alias_method :Feature, :describe
+  end
 
-      def executes(scope=:all, &block)
-        before(scope, &block)
-      end
+  class RSpec::Core::ExampleGroup
+    def self.executes(scope=:all, &block)
+      before(scope, &block)
     end
 
     %w(Scenario: Given When Background).each do |group|

@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{unencumbered}
-  s.version = "0.1.2"
+  s.version = "0.2.0.rc1"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hashrocket"]
-  s.date = %q{2010-04-21}
+  s.date = %q{2010-06-01}
   s.description = %q{You got Cucumber in my RSpec!}
   s.email = %q{info@hashrocket.com}
   s.extra_rdoc_files = [
@@ -19,13 +19,14 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
      ".gitignore",
+     ".rspec",
      "LICENSE",
      "README.textile",
      "Rakefile",
      "VERSION",
      "lib/unencumbered.rb",
      "spec/lib/unencumbered_spec.rb",
-     "spec/spec.opts",
+     "spec/spec_helper.rb",
      "unencumbered.gemspec"
   ]
   s.homepage = %q{http://github.com/hashrocket/unencumbered}
@@ -34,7 +35,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{Just enough Cucumber in RSpec.}
   s.test_files = [
-    "spec/lib/unencumbered_spec.rb"
+    "spec/lib/unencumbered_spec.rb",
+     "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then

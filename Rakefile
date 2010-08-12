@@ -10,6 +10,8 @@ begin
     gem.email = "info@hashrocket.com"
     gem.homepage = "http://github.com/hashrocket/unencumbered"
     gem.authors = ["Hashrocket"]
+
+    gem.add_dependency 'rspec', '>= 2.0.0.beta.19'
   end
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"

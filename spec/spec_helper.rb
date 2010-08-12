@@ -1,3 +1,5 @@
+require 'rubygems'
+require 'rspec'
 require File.expand_path('../../lib/unencumbered', __FILE__)
 
 RSpec.configure do |c|
